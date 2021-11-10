@@ -1,18 +1,6 @@
 
 package com.mycompany.binarytrees_bst;
 
-class Node {
-   public int key;
-   public Node left;
-   public Node right;
-
-   public Node(int nodeKey) {
-      key = nodeKey;
-      left = null;
-      right = null;
-   }
-}
-
 public class BinarySearchTree {
    private Node root;
    
@@ -23,6 +11,38 @@ public class BinarySearchTree {
    public Node getRoot() {
       return root;
    }
+   public void setRoot(Node r) {
+       root=r;
+   }
+   
+   public Node copyTree(Node root){
+      if(root == null) return null;
+      Node r = copyTree(root.right);     
+      Node l = copyTree(root.left);      
+      return (new Node(root.key, l, r));
+   }
+   
+   public void preorderPrint(Node root) {
+        if (root == null) return;
+        System.out.println(root.key);
+        preorderPrint(root.left);
+        preorderPrint(root.right);
+    }
+
+    public void postorderPrint(Node root) {
+        if (root == null) return;
+        preorderPrint(root.left);
+        preorderPrint(root.right);
+        System.out.println(root.key);
+    }
+        
+    public void inorderPrint(Node root) {
+        if (root == null)  return;
+        preorderPrint(root.left);
+        System.out.println(root.key);
+        preorderPrint(root.right);
+    }
+   
    
    public Node search(int desiredKey) {
       Node currentNode = root;
